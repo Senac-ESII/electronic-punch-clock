@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 
-const RegisteredTimeSchema = new Schema({
-  userId: Number,
+const ClockSchema = new Schema({
+  userId: String,
   timeRegistered: String,
   user: {
     type: Schema.Types.ObjectId,
@@ -9,4 +9,4 @@ const RegisteredTimeSchema = new Schema({
   },
 });
 
-module.exports = model("RegisteredTime", RegisteredTimeSchema);
+module.exports = model("Clock", ClockSchema);

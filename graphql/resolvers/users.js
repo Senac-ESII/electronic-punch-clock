@@ -2,7 +2,7 @@ const { UserInputError } = require("apollo-server");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const User = require("../../models/User");
+const User = require("../../models/user");
 const { SECRET_KEY } = require("../../config");
 const {
   validateRegisterInput,
@@ -12,7 +12,7 @@ const {
 function generateToken(user) {
   return jwt.sign(
     {
-      id: user.id,
+      id: user._id,
       email: user.email,
       username: user.username,
     },
@@ -38,11 +38,19 @@ module.exports = {
         throw new UserInputError("Errors", { errors });
       }
 
-      const user = await User.findOne({ username });
+      let user = await User.findOne({ username });
       if (user) {
         throw new UserInputError("Username already taken!", {
           errors: {
-            username: "This username ir taken",
+            username: "This username is taken",
+          },
+        });
+      }
+      user = await User.findOne({ email });
+      if (user) {
+        throw new UserInputError("Email already taken!", {
+          errors: {
+            username: "This Email is taken",
           },
         });
       }
@@ -84,7 +92,6 @@ module.exports = {
       }
 
       const token = generateToken(user);
-
       return {
         ...user._doc,
         id: user._id,
