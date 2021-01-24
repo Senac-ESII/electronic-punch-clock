@@ -12,6 +12,7 @@ module.exports = {
         if (user.role !== "user") {
           try {
             const clocks = await Clock.find();
+            console.log(clocks);
             return clocks;
           } catch (error) {
             throw new Error(error);
@@ -29,6 +30,7 @@ module.exports = {
 
       try {
         const clocks = await Clock.find({ userId });
+        console.log(clocks);
         return clocks;
       } catch (error) {
         throw new Error(error);

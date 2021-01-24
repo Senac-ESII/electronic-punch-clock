@@ -21,6 +21,7 @@ function UserDashboard() {
   const { loading, data: { getClocksById: clocks } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
+  console.log("CLOCKS: ", clocks);
 
   const { values, onChange, onSubmit } = useForm(createClockCallback, {
     date: "",
@@ -53,15 +54,19 @@ function UserDashboard() {
     createClock();
   }
 
-  const handleItemClick = (e, { name }) => logout();
+  const handleItemClick = () => logout();
 
   return (
-    <Grid columns={3}>
+    <Grid columns={5}>
       <Grid.Row className="page-title">
         <h1>Clocks</h1>
       </Grid.Row>
       <Grid.Row>
-        {user && <Grid.Column></Grid.Column>}
+        {user && (
+          <Grid.Column>
+            <h1>ola</h1>
+          </Grid.Column>
+        )}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (
@@ -69,13 +74,12 @@ function UserDashboard() {
             {clocks &&
               clocks.map((clock) => (
                 <Grid.Column key={clock.id} style={{ marginBottom: 20 }}>
+                  {console.log(clock.id)}
                   <p>{clock.timeRegistered}</p>
                 </Grid.Column>
               ))}
           </Transition.Group>
         )}
-      </Grid.Row>
-      <Grid.Row>
         <Modal
           trigger={<Button>Register</Button>}
           header={
@@ -112,8 +116,6 @@ function UserDashboard() {
             </>
           }
         />
-      </Grid.Row>
-      <Grid.Row>
         <Button onClick={handleItemClick} as={Link} to="/login">
           Logout
         </Button>
