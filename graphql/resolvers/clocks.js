@@ -7,12 +7,15 @@ const checkAuth = require("../../util/checkAuth");
 module.exports = {
   Query: {
     async getClocks(_, args, context) {
-      const { id } = checkAuth(context);
+      const userData = checkAuth(context);
+      let username = userData.username;
       try {
-        const user = await User.findOne({ id });
+        let user = await User.findOne({ username });
+        console.log(user);
         if (user.role !== "user") {
           try {
             const clocks = await Clock.find();
+            console.log(clocks);
             return clocks;
           } catch (error) {
             throw new Error(error);
