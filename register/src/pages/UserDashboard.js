@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Grid, Transition } from "semantic-ui-react";
+import { Button, Grid, Transition, Modal } from "semantic-ui-react";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 
 import { AuthContext } from "../context/auth";
@@ -30,6 +30,19 @@ function UserDashboard() {
               ))}
           </Transition.Group>
         )}
+      </Grid.Row>
+      <Grid.Row>
+        {/* <Button as="div" labelPosition="right" onClick={sendClock}>
+          <Button color="blue" basic>
+            button
+          </Button>
+        </Button> */}{" "}
+        <Modal
+          trigger={<Button>Register</Button>}
+          header="Novo Registro"
+          content="Call Benjamin regarding the reports."
+          actions={[{ key: "done", content: "Done", positive: true }]}
+        />
       </Grid.Row>
     </Grid>
   );
