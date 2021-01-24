@@ -10,7 +10,6 @@ function UserDashboard() {
   const { loading, data: { getClocksById: clocks } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
-  console.log("clocls", clocks);
 
   return (
     <Grid columns={3}>
@@ -18,11 +17,7 @@ function UserDashboard() {
         <h1>Clocks</h1>
       </Grid.Row>
       <Grid.Row>
-        {user && (
-          <Grid.Column>
-            <p>carolzinha</p>
-          </Grid.Column>
-        )}
+        {user && <Grid.Column></Grid.Column>}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (
@@ -30,7 +25,7 @@ function UserDashboard() {
             {clocks &&
               clocks.map((clock) => (
                 <Grid.Column key={clock.id} style={{ marginBottom: 20 }}>
-                  <p>carol</p>
+                  <p>{clock.timeRegistered}</p>
                 </Grid.Column>
               ))}
           </Transition.Group>
