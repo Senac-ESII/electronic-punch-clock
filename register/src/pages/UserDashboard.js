@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery, useMutation, gql } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import {
   Button,
   Grid,
@@ -9,17 +9,27 @@ import {
   Label,
   Form,
 } from "semantic-ui-react";
-import { FETCH_POSTS_QUERY } from "../util/graphql";
+import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
 
 function UserDashboard() {
+  const FETCH_CLOCKS_QUERY = gql`
+    {
+      getClocksById {
+        id
+        userId
+        timeRegistered
+      }
+    }
+  `;
+
   const { user, logout } = useContext(AuthContext);
   let { username } = user;
   const { loading, data: { getClocksById: clocks } = {} } = useQuery(
-    FETCH_POSTS_QUERY
+    FETCH_CLOCKS_QUERY
   );
   console.log("CLOCKS: ", clocks);
 
@@ -42,10 +52,10 @@ function UserDashboard() {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
+        query: FETCH_CLOCKS_QUERY,
       });
       data.createClock = [result.data.createClock];
-      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
+      proxy.writeQuery({ query: FETCH_CLOCKS_QUERY, data });
       values.date = "";
       values.time = "";
     },
@@ -62,11 +72,7 @@ function UserDashboard() {
         <h1>Clocks</h1>
       </Grid.Row>
       <Grid.Row>
-        {user && (
-          <Grid.Column>
-            <h1>ola</h1>
-          </Grid.Column>
-        )}
+        {user && <Grid.Column></Grid.Column>}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (

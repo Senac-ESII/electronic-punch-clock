@@ -1,15 +1,25 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Grid, Transition, Button } from "semantic-ui-react";
-import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { Link } from "react-router-dom";
+import gql from "graphql-tag";
 
 import { AuthContext } from "../context/auth";
 
 function AdminDashboard() {
+  const FETCH_CLOCKS_QUERY = gql`
+    {
+      getClocks {
+        id
+        userId
+        timeRegistered
+      }
+    }
+  `;
+
   const { user, logout } = useContext(AuthContext);
   const { loading, data: { getClocks: clocks } = {} } = useQuery(
-    FETCH_POSTS_QUERY
+    FETCH_CLOCKS_QUERY
   );
 
   const handleItemClick = () => logout();
