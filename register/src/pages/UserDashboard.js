@@ -11,11 +11,12 @@ import {
 } from "semantic-ui-react";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import { useForm } from "../util/hooks";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
 
 function UserDashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   let { username } = user;
   const { loading, data: { getClocksById: clocks } = {} } = useQuery(
     FETCH_POSTS_QUERY
@@ -51,6 +52,8 @@ function UserDashboard() {
   function createClockCallback() {
     createClock();
   }
+
+  const handleItemClick = (e, { name }) => logout();
 
   return (
     <Grid columns={3}>
@@ -109,6 +112,11 @@ function UserDashboard() {
             </>
           }
         />
+      </Grid.Row>
+      <Grid.Row>
+        <Button onClick={handleItemClick} as={Link} to="/login">
+          Logout
+        </Button>
       </Grid.Row>
     </Grid>
   );

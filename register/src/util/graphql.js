@@ -7,5 +7,10 @@ export const FETCH_POSTS_QUERY = gql`
       userId
       timeRegistered
     }
+    getClocks {
+      id
+      userId
+      timeRegistered
+    }
   }
 `;
