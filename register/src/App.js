@@ -10,6 +10,7 @@ import AuthRoute from "./util/authRoute";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Container>
           <Route exact path="/" component={Home} />
           <AuthRoute exact path="/login" component={Login} />
+          <Route exact path="/dashboard" component={UserDashboard} />
         </Container>
       </Router>
     </AuthProvider>
