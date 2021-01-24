@@ -29,7 +29,6 @@ module.exports = {
 
       try {
         const clocks = await Clock.find({ userId });
-        console.log(clocks);
         return clocks;
       } catch (error) {
         throw new Error(error);
