@@ -8,14 +8,12 @@ module.exports = {
   Query: {
     async getClocks(_, args, context) {
       const userData = checkAuth(context);
-      let username = userData.username;
+      let _id = userData.id;
       try {
-        let user = await User.findOne({ username });
-        console.log(user);
+        let user = await User.findOne({ _id });
         if (user.role !== "user") {
           try {
             const clocks = await Clock.find();
-            console.log(clocks);
             return clocks;
           } catch (error) {
             throw new Error(error);
@@ -28,10 +26,12 @@ module.exports = {
       }
     },
     async getClocksById(_, args, context) {
-      const { id } = checkAuth(context);
+      const userData = checkAuth(context);
+      let userId = userData.id;
 
       try {
-        const clocks = await Clock.find({ id });
+        const clocks = await Clock.find({ userId });
+        console.log(clocks);
         return clocks;
       } catch (error) {
         throw new Error(error);
