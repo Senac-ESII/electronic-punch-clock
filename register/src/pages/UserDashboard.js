@@ -11,9 +11,12 @@ import {
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
+import SmallLogo from "../assets/imgs/smallLogo.svg";
+import Logout from "../assets/imgs/logout.svg";
+// import "./styles.css";
 
 function UserDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
@@ -27,7 +30,6 @@ function UserDashboard() {
   `;
 
   const { user, logout } = useContext(AuthContext);
-  let { username } = user;
   const { loading, data: { getClocksById: clocks } = {} } = useQuery(
     FETCH_CLOCKS_QUERY
   );
@@ -67,32 +69,26 @@ function UserDashboard() {
   const handleItemClick = () => logout();
 
   return (
-    <Grid columns={5}>
-      <Grid.Row className="page-title">
-        <h1>Clocks</h1>
-      </Grid.Row>
-      <Grid.Row>
-        {user && <Grid.Column></Grid.Column>}
-        {loading ? (
-          <h1>Loading posts..</h1>
-        ) : (
-          <Transition.Group>
-            {clocks &&
-              clocks.map((clock) => (
-                <Grid.Column key={clock.id} style={{ marginBottom: 20 }}>
-                  {console.log(clock.id)}
-                  <p>{clock.timeRegistered}</p>
-                </Grid.Column>
-              ))}
-          </Transition.Group>
-        )}
+    <div className="ui grid">
+      <div className="two wide column">
+        <div class="ui small image">
+          <img src={SmallLogo} alt="logo" />
+        </div>
+        <div className="ui hidden divider"></div>
+        <div className="logout-button">
+          <Button className="ui big button" onClick={handleItemClick}>
+            <img src={Logout} alt="logout" />
+          </Button>
+        </div>
+      </div>
+      <div className="fourteen wide column">
         <Modal
-          trigger={<Button>Register</Button>}
+          trigger={<Button>Registrar</Button>}
           header={
             <>
               <Header as="h3">Novo Registro</Header>
               <Label>Colaborador</Label>
-              <Header as="h4">{username}</Header>
+              <Header as="h4">{user.username}</Header>
             </>
           }
           content={
@@ -122,11 +118,34 @@ function UserDashboard() {
             </>
           }
         />
-        <Button onClick={handleItemClick} as={Link} to="/login">
-          Logout
-        </Button>
-      </Grid.Row>
-    </Grid>
+
+        {user && <Grid.Column></Grid.Column>}
+        {loading ? (
+          <h1>Loading posts..</h1>
+        ) : (
+          <Transition.Group>
+            {clocks &&
+              clocks.map((clock) => (
+                <div className="ui grid">
+                  <div className="ui fluid card">
+                    <div key={clock.id} style={{ marginBottom: 20 }}>
+                      <div className="four wide column">
+                        <h4>{user.username}</h4>
+                      </div>
+                      <div className="four wide column">
+                        <h5>{clock.timeRegistered.substr(0, 9)}</h5>
+                      </div>
+                      <div className="four wide column">
+                        <h5>{clock.timeRegistered.substr(10)}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </Transition.Group>
+        )}
+      </div>
+    </div>
   );
 }
 

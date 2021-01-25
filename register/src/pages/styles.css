@@ -1,0 +1,44 @@
+#root {
+  height: 100%;
+}
+
+.ui.container {
+  height: 100%;
+  width: 100%;
+}
+
+.ui.grid {
+  height: 100%;
+}
+
+.login-button {
+  background: #219653 !important;
+}
+
+.register-button {
+  background: #219653 !important;
+}
+
+.login-button-text {
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.span-text {
+  color: #ffffff;
+}
+
+.ui.segment {
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+.logout-button {
+  background: #ffffff !important;
+}

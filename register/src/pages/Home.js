@@ -1,15 +1,27 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
+import Logo from "../assets/imgs/logo.svg";
+import Vector from "../assets/imgs/vector.svg";
+import "./styles.css";
 
 function Home() {
   return (
-    <Grid columns={3}>
-      <Grid.Row className="page-title">
-        <h1>Register</h1>
-        <h4>ACCESS CONTROL</h4>
-      </Grid.Row>
-      <Grid.Row></Grid.Row>
-    </Grid>
+    <div class="ui container" style={{ backgroundColor: "#424242" }}>
+      <div class="ui column grid">
+        <div class="column">
+          <div class="ui center aligned segment">
+            <div class="ui small image">
+              <img src={Logo} alt="logo" />
+            </div>
+          </div>
+          <div className="ui hidden divider"></div>
+          <div class="ui center aligned segment">
+            <div class="ui large image">
+              <img src={Vector} alt="base" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
