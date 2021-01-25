@@ -6,7 +6,7 @@ import gql from "graphql-tag";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../util/hooks";
 import Logo from "../assets/imgs/logo.svg";
-// import "./styles.css";
+import "./styles.css";
 import { Link } from "react-router-dom";
 
 function Login(props) {
@@ -14,16 +14,16 @@ function Login(props) {
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
-    username: "",
+    email: "",
     password: "",
   });
 
   const LOGIN_USER = gql`
-    mutation login($username: String!, $password: String!) {
-      login(username: $username, password: $password) {
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
         id
         email
-        username
+        name
         role
         token
       }
@@ -64,10 +64,10 @@ function Login(props) {
                 >
                   <span className="span-text">Login</span>
                   <Form.Input
-                    name="username"
+                    name="email"
                     type="text"
-                    value={values.username}
-                    error={errors.username ? true : false}
+                    value={values.email}
+                    error={errors.email ? true : false}
                     onChange={onChange}
                   />
                   <span className="span-text">Senha</span>
@@ -78,16 +78,14 @@ function Login(props) {
                     error={errors.password ? true : false}
                     onChange={onChange}
                   />
-                  <div class="login-button">
-                    <button
-                      type="submit"
-                      class="ui big button"
-                      as={Link}
-                      to="/dashboard"
-                    >
-                      <span className="login-button-text">Login</span>
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    class="colored-button ui big button"
+                    as={Link}
+                    to="/dashboard"
+                  >
+                    <span className="button-text">Login</span>
+                  </button>
                 </Form>
                 {Object.keys(errors).length > 0 && (
                   <div className="ui error message">

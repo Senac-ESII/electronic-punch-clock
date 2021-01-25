@@ -1,22 +1,14 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import {
-  Button,
-  Grid,
-  Transition,
-  Modal,
-  Header,
-  Label,
-  Form,
-} from "semantic-ui-react";
+import { Button, Transition, Modal, Form, List, Grid } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
-// import { Link } from "react-router-dom";
+import ListCard from "../components/ListCard";
 
 import { AuthContext } from "../context/auth";
 import SmallLogo from "../assets/imgs/smallLogo.svg";
 import Logout from "../assets/imgs/logout.svg";
-// import "./styles.css";
+import "./styles.css";
 
 function UserDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
@@ -70,83 +62,80 @@ function UserDashboard() {
 
   return (
     <div className="ui grid">
-      <div className="two wide column">
+      <div className="side-bar two wide column">
         <div class="ui small image">
-          <img src={SmallLogo} alt="logo" />
+          <img src={SmallLogo} alt="logo" className="logo-image" />
         </div>
-        <div className="ui hidden divider"></div>
-        <div className="logout-button">
-          <Button className="ui big button" onClick={handleItemClick}>
-            <img src={Logout} alt="logout" />
-          </Button>
-        </div>
+        <div className="ui divider"></div>
+        <Button
+          className="logout-button ui big button"
+          onClick={handleItemClick}
+        >
+          <img src={Logout} alt="logout" />
+        </Button>
       </div>
       <div className="fourteen wide column">
         <Modal
-          trigger={<Button>Registrar</Button>}
+          trigger={
+            <button class="colored-button ui button">
+              <span className="button-text">Registrar</span>
+            </button>
+          }
           header={
             <>
-              <Header as="h3">Novo Registro</Header>
-              <Label>Colaborador</Label>
-              <Header as="h4">{user.username}</Header>
+              <h3>Novo Registro</h3>
+              <label>Colaborador</label>
+              {/* <h4>{user.username}</h4> */}
             </>
           }
           content={
             <>
-              <Label pointing="below">Data/Hora</Label>
-              <Form onSubmit={onSubmit}>
-                <Form.Field>
-                  <Form.Input
-                    placeholder="___/___/___"
-                    name="date"
-                    onChange={onChange}
-                    value={values.date}
-                    error={error ? true : false}
-                  ></Form.Input>
-                  <Form.Input
-                    placeholder="___:___"
-                    name="time"
-                    onChange={onChange}
-                    value={values.time}
-                    error={error ? true : false}
-                  ></Form.Input>
-                  <Button type="submit" color="teal">
-                    Submit
-                  </Button>
-                </Form.Field>
-              </Form>
+              <label>Data/Hora</label>
+              <form onSubmit={onSubmit}>
+                <Form.Input
+                  placeholder="___/___/___"
+                  name="date"
+                  onChange={onChange}
+                  value={values.date}
+                  error={error ? true : false}
+                ></Form.Input>
+                <Form.Input
+                  placeholder="___:___"
+                  name="time"
+                  onChange={onChange}
+                  value={values.time}
+                  error={error ? true : false}
+                ></Form.Input>
+
+                <Button type="submit" color="teal">
+                  Submit
+                </Button>
+              </form>
             </>
           }
         />
-
-        {user && <Grid.Column></Grid.Column>}
-        {loading ? (
-          <h1>Loading posts..</h1>
-        ) : (
-          <Transition.Group>
-            {clocks &&
-              clocks.map((clock) => (
-                <div className="ui grid">
-                  <div className="ui fluid card">
-                    <div key={clock.id} style={{ marginBottom: 20 }}>
-                      <div className="four wide column">
-                        <h4>{user.username}</h4>
-                      </div>
-                      <div className="four wide column">
-                        <h5>{clock.timeRegistered.substr(0, 9)}</h5>
-                      </div>
-                      <div className="four wide column">
-                        <h5>{clock.timeRegistered.substr(10)}</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </Transition.Group>
-        )}
+        <div className="three column row">
+          {user && (
+            <Grid.Column>{/* //   <ListCard user={clocks} /> */}</Grid.Column>
+          )}
+          {loading ? (
+            <h1>Loading posts..</h1>
+          ) : (
+            <div>
+              {clocks &&
+                clocks.map((clock) => (
+                  <ListCard clock={clock} />
+                  //   <div key={clock.id} style={{ marginBottom: 20 }}>
+                  //     <label class="">{user.username}</label>
+                  //     <label class="">{clock.timeRegistered.substr(0, 10)}</label>
+                  //     <label class="">{clock.timeRegistered.substr(10)}</label>
+                  //   </div>
+                ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
 export default UserDashboard;

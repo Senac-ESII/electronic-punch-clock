@@ -38,7 +38,9 @@ function AdminDashboard() {
             {clocks &&
               clocks.map((clock) => (
                 <Grid.Column key={clock.id} style={{ marginBottom: 20 }}>
-                  <p>{clock.timeRegistered}</p>
+                  <label class="">{clock.username}</label>
+                  <label class="">{clock.timeRegistered.substr(0, 10)}</label>
+                  <label class="">{clock.timeRegistered.substr(10)}</label>
                 </Grid.Column>
               ))}
           </Transition.Group>
