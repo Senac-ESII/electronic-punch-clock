@@ -10,7 +10,9 @@ import Logout from "../assets/imgs/logout.svg";
 import Registers from "../assets/imgs/registers.svg";
 import ListCard from "../components/ListCard";
 import "./styles.css";
-
+/**
+ * dashboard used for admins to manage employees electronic clock
+ */
 function AdminDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
     {
@@ -26,7 +28,9 @@ function AdminDashboard() {
   const { loading, data: { getClocks: clocks } = {} } = useQuery(
     FETCH_CLOCKS_QUERY
   );
-
+  /**
+   * When receive click event, trigger the logout function.
+   */
   const handleItemClick = () => logout();
 
   return (

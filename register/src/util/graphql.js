@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
-
+/**
+ * Get Routes
+ */
 export const FETCH_POSTS_QUERY = gql`
   {
     getClocksById {

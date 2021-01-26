@@ -1,5 +1,9 @@
 import { useState } from "react";
-
+/**
+ * Hooks to change states of values, used to create new clocks in user dashboard.
+ * @param {*} callback
+ * @param {*} initialState
+ */
 export const useForm = (callback, initialState = {}) => {
   const [values, setValues] = useState(initialState);
 

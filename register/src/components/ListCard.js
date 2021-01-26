@@ -1,6 +1,9 @@
 import React from "react";
 import { Grid, List } from "semantic-ui-react";
-
+/**
+ * Card container used to display clocks list in user dashboard and admin dashboard.
+ * @param {object} clock
+ */
 const ListExampleDivided = (clock) => (
   <List divided verticalAlign="middle">
     <List.Item>

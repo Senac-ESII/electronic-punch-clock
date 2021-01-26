@@ -1,6 +1,8 @@
 import React, { useReducer, createContext } from "react";
 import jwtDecode from "jwt-decode";
-
+/**
+ * defines de initial state of user as null
+ */
 const initialState = {
   user: null,
 };
@@ -38,9 +40,16 @@ function authReducer(state, action) {
   }
 }
 
+/**
+ * Authentication provider
+ * @param {props} props
+ */
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
-
+  /**
+   * Set the jwt token received from user to the local storage
+   * @param {object} userData
+   */
   function login(userData) {
     localStorage.setItem("jwtToken", userData.token);
     dispatch({
@@ -49,6 +58,9 @@ function AuthProvider(props) {
     });
   }
 
+  /**
+   * Delete de current jwt token from local storage
+   */
   function logout() {
     localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });

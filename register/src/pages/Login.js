@@ -8,7 +8,10 @@ import { useForm } from "../util/hooks";
 import Logo from "../assets/imgs/logo.svg";
 import "./styles.css";
 import { Link } from "react-router-dom";
-
+/**
+ * Login page.
+ * @param {object} props
+ */
 function Login(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
@@ -41,6 +44,9 @@ function Login(props) {
     variables: values,
   });
 
+  /**
+   * Trigger login user as a callback if their aren't already logged.
+   */
   function loginUserCallback() {
     loginUser();
   }

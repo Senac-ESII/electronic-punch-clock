@@ -11,7 +11,9 @@ import SmallLogo from "../assets/imgs/smallLogo.svg";
 import Logout from "../assets/imgs/logout.svg";
 import Registers from "../assets/imgs/registers.svg";
 import "./styles.css";
-
+/**
+ * Dashboard that the user can see their electronic clock hourly and regiter new one.
+ */
 function UserDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
     {
@@ -56,6 +58,9 @@ function UserDashboard() {
       values.time = "";
     },
   });
+  /**
+   * Trigger create a clock as a callback.
+   */
   function createClockCallback() {
     createClock();
   }

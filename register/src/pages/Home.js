@@ -2,7 +2,9 @@ import React from "react";
 import Logo from "../assets/imgs/logo.svg";
 import Vector from "../assets/imgs/vector.svg";
 import "./styles.css";
-
+/**
+ * Just a home page.
+ */
 function Home() {
   return (
     <div
