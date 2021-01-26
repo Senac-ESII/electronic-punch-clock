@@ -87,3 +87,10 @@ body {
   height: 210px;
   top: 25%;
 }
+
+.ui.segment {
+  background-color: #ffffff;
+  width: 550px;
+  margin-left: 150px;
+  border-radius: 8px;
+}

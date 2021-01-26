@@ -120,21 +120,16 @@ function UserDashboard() {
           }
         />
         <div className="three column row">
-          {user && (
-            <Grid.Column>{/* //   <ListCard user={clocks} /> */}</Grid.Column>
-          )}
+          {user && <Grid.Column></Grid.Column>}
           {loading ? (
             <h1>Loading posts..</h1>
           ) : (
             <div>
               {clocks &&
                 clocks.map((clock) => (
-                  <ListCard clock={clock} />
-                  //   <div key={clock.id} style={{ marginBottom: 20 }}>
-                  //     <label class="">{user.username}</label>
-                  //     <label class="">{clock.timeRegistered.substr(0, 10)}</label>
-                  //     <label class="">{clock.timeRegistered.substr(10)}</label>
-                  //   </div>
+                  <div class="ui segment relaxed">
+                    <ListCard clock={clock} user={user} />
+                  </div>
                 ))}
             </div>
           )}
