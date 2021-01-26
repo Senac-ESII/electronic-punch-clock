@@ -1,5 +1,7 @@
 const { model, Schema } = require("mongoose");
-
+/**
+ * a schema that defines fields of Clocks table in the database
+ */
 const ClockSchema = new Schema({
   userId: String,
   timeRegistered: String,

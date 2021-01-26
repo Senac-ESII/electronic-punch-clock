@@ -8,7 +8,11 @@ const {
   validateRegisterInput,
   validateLoginInput,
 } = require("../../util/validators");
-
+/**
+ * Create a new jwt token
+ * @param {Object} user
+ * @returns {token} - return a new jwt token
+ */
 function generateToken(user) {
   return jwt.sign(
     {
@@ -23,6 +27,14 @@ function generateToken(user) {
 
 module.exports = {
   Mutation: {
+    /**
+     * Create a new user in database, hash the password and generate a new jwt token
+     * @param {String} name
+     * @param {String} email
+     * @param {String} password
+     * @param {Request} context have all logged user attributes
+     * @returns {object} - return the object User and the jwt token
+     */
     async register(
       _,
       { registerInput: { name, email, password } },
@@ -60,7 +72,12 @@ module.exports = {
         token,
       };
     },
-
+    /**
+     * create a new jwt token that is used to validate login, compare the password with hash database password and validate inputs
+     * @param {String} email
+     * @param {String} password
+     * @returns {token} - returns a user and a new jwt token
+     */
     async login(_, { email, password }) {
       const { errors, valid } = validateLoginInput(email, password);
       if (!valid) {

@@ -1,5 +1,7 @@
 const { gql } = require("apollo-server");
-
+/**
+ * gql schemas are all the resources and returns that we can access in the api
+ */
 module.exports = gql`
   type User {
     id: String!

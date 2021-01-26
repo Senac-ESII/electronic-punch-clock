@@ -4,6 +4,11 @@ const checkAuth = require("../../util/checkAuth");
 
 module.exports = {
   Query: {
+    /**
+     * searches the database and returns all clocks
+     * @param {Request} context have all logged user attributes
+     * @returns {object} - a list with all Clock objects in the database
+     */
     async getClocks(_, args, context) {
       const userData = checkAuth(context);
       let _id = userData.id;
@@ -23,6 +28,11 @@ module.exports = {
         throw new Error(error);
       }
     },
+    /**
+     * searches the database and returns all clocks that contain the same id
+     * @param {Request} context have all logged user attributes
+     * @returns {object} - a list of Clock objects which user id is equal to id of logged user
+     */
     async getClocksById(_, args, context) {
       const userData = checkAuth(context);
       let userId = userData.id;
@@ -36,6 +46,13 @@ module.exports = {
     },
   },
   Mutation: {
+    /**
+     * create a new object timeRegister in the database with userId as a reference
+     * @param {String} date
+     * @param {String} time
+     * @param {Request} context have all logged user attributes
+     * @returns {object} - Clock object
+     */
     async createClock(_, { date, time }, context) {
       const userData = checkAuth(context);
       if (userData.role !== "admin") {

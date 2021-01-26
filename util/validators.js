@@ -1,9 +1,11 @@
-module.exports.validateRegisterInput = (
-  username,
-  email,
-  password,
-  confirmPassword
-) => {
+/**
+ * Validate register inputs: checks username, email or password must not be empty and email has a especific format.
+ * @param {String} username
+ * @param {String} email
+ * @param {String} password
+ * @returns {object} - return the errors if they occur
+ */
+module.exports.validateRegisterInput = (username, email, password) => {
   const errors = {};
   if (username.trim() === "") {
     errors.username = "Username must not be empty!";
@@ -26,6 +28,12 @@ module.exports.validateRegisterInput = (
   };
 };
 
+/**
+ * Validate login inputs: email and password, checking if they are not empty.
+ * @param {String} email
+ * @param {String} password
+ * @returns {object} - return the errors if they occur
+ */
 module.exports.validateLoginInput = (email, password) => {
   const errors = {};
   if (email.trim() === "") {
