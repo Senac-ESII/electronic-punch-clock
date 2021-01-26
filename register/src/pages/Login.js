@@ -46,16 +46,19 @@ function Login(props) {
   }
 
   return (
-    <div class="ui container" style={{ backgroundColor: "#424242" }}>
+    <div
+      class="ui container"
+      style={{ backgroundColor: "#424242", height: "102.2%" }}
+    >
       <div class="ui container">
         <div className="ui vertically divided grid">
           <div className="middle aligned two column row raised">
             <div className="column">
               <div className="centered">
-                <img ui medium image src={Logo} alt="logo" />
+                <img className="login-logo ui image" src={Logo} alt="logo" />
               </div>
             </div>
-            <div className="column">
+            <div className="ui segment div-login">
               <div className="form">
                 <Form
                   onSubmit={onSubmit}
@@ -80,7 +83,7 @@ function Login(props) {
                   />
                   <button
                     type="submit"
-                    class="colored-button ui big button"
+                    class="register-button ui medium button"
                     as={Link}
                     to="/dashboard"
                   >

@@ -1,11 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../assets/imgs/logo.svg";
 import Vector from "../assets/imgs/vector.svg";
 import "./styles.css";
 
 function Home() {
   return (
-    <div class="ui container" style={{ backgroundColor: "#424242" }}>
+    <div
+      class="ui container"
+      style={{ backgroundColor: "#424242", height: "102.2%" }}
+    >
       <div class="ui column grid">
         <div class="column">
           <div class="ui center aligned segment">

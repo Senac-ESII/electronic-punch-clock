@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { Button, Transition, Modal, Form, List, Grid } from "semantic-ui-react";
+import { Button, Modal, Form, List, Grid } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
 import ListCard from "../components/ListCard";
@@ -8,6 +8,7 @@ import ListCard from "../components/ListCard";
 import { AuthContext } from "../context/auth";
 import SmallLogo from "../assets/imgs/smallLogo.svg";
 import Logout from "../assets/imgs/logout.svg";
+import Registers from "../assets/imgs/registers.svg";
 import "./styles.css";
 
 function UserDashboard() {
@@ -62,10 +63,14 @@ function UserDashboard() {
 
   return (
     <div className="ui grid">
-      <div className="side-bar two wide column">
+      <div className="side-bar column">
         <div class="ui small image">
           <img src={SmallLogo} alt="logo" className="logo-image" />
         </div>
+        <div className="ui divider"></div>
+        <Button className="dash-button ui button">
+          <img src={Registers} alt="registro" />
+        </Button>
         <div className="ui divider"></div>
         <Button
           className="logout-button ui big button"
@@ -74,7 +79,7 @@ function UserDashboard() {
           <img src={Logout} alt="logout" />
         </Button>
       </div>
-      <div className="fourteen wide column">
+      <div className="thirteen wide column">
         <Modal
           trigger={
             <button class="colored-button ui button">
@@ -85,7 +90,7 @@ function UserDashboard() {
             <>
               <h3>Novo Registro</h3>
               <label>Colaborador</label>
-              {/* <h4>{user.username}</h4> */}
+              <h4>{user.name}</h4>
             </>
           }
           content={

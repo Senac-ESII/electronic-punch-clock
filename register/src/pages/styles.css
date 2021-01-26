@@ -33,7 +33,7 @@
 }
 
 .span-text {
-  color: #ffffff;
+  color: #000000;
 }
 
 .ui.segment {
@@ -48,11 +48,42 @@ body {
 
 .logout-button {
   background: #ffffff !important;
-  margin-top: 475px !important;
-  margin-left: 35px !important;
+  width: 144.38px;
+  height: 76px;
+  margin-top: 210px !important;
 }
 
 .side-bar {
-  height: 120%;
+  height: 102.2%;
+  width: 160px !important;
   background-color: #ffffff;
+}
+
+.field {
+  width: 300px !important;
+}
+
+.login-logo {
+  width: 300px;
+  height: 270px;
+  margin-left: 150px;
+  margin-bottom: 120px;
+}
+
+.bg-color {
+  background-color: #424242 !important;
+  border: none !important;
+}
+
+.dash-button {
+  width: 144.38px;
+  height: 76px;
+  background-color: #ffffff !important;
+}
+
+.div-login {
+  background-color: #ffffff !important;
+  border-radius: 15px !important;
+  height: 210px;
+  top: 25%;
 }

@@ -5,7 +5,10 @@ const ListExampleDivided = (clock) => (
   <List divided verticalAlign="middle">
     <List.Item>
       <List.Content>
-        <List.Header>{clock.clock.timeRegistered}</List.Header>
+        <h5 className="clocks">
+          {clock.clock.timeRegistered.substr(0, 10)}
+          {clock.clock.timeRegistered.substr(10)}
+        </h5>
       </List.Content>
     </List.Item>
   </List>
