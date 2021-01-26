@@ -25,13 +25,3 @@ const ListExampleDivided = (clock) => (
   </List>
 );
 export default ListExampleDivided;
-
-{
-  /* <h5 className="clocks space">
-  {clock.user.name}
-
-  {clock.clock.timeRegistered.substr(0, 10)}
-
-  {clock.clock.timeRegistered.substr(10)}
-</h5>; */
-}
