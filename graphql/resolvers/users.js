@@ -14,7 +14,7 @@ function generateToken(user) {
     {
       id: user._id,
       email: user.email,
-      username: user.username,
+      name: user.name,
     },
     SECRET_KEY,
     { expiresIn: "3h" }
@@ -25,39 +25,27 @@ module.exports = {
   Mutation: {
     async register(
       _,
-      { registerInput: { username, email, password } },
+      { registerInput: { name, email, password } },
       context,
       info
     ) {
-      const { valid, errors } = validateRegisterInput(
-        username,
-        email,
-        password
-      );
+      const { valid, errors } = validateRegisterInput(name, email, password);
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
 
-      let user = await User.findOne({ username });
+      let user = await User.findOne({ email });
       if (user) {
-        throw new UserInputError("Username already taken!", {
+        throw new UserInputError("Email already in use!", {
           errors: {
-            username: "This username is taken",
-          },
-        });
-      }
-      user = await User.findOne({ email });
-      if (user) {
-        throw new UserInputError("Email already taken!", {
-          errors: {
-            username: "This Email is taken",
+            email: "Email already in use",
           },
         });
       }
       password = await bcrypt.hash(password, 12);
 
       const newUser = new User({
-        username,
+        name,
         email,
         password,
         role: "user",
@@ -73,16 +61,16 @@ module.exports = {
       };
     },
 
-    async login(_, { username, password }) {
-      const { errors, valid } = validateLoginInput(username, password);
+    async login(_, { email, password }) {
+      const { errors, valid } = validateLoginInput(email, password);
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email });
       if (!user) {
-        errors.general = "User not found!";
-        throw new UserInputError("User not found!", { errors });
+        errors.general = "Email not found!";
+        throw new UserInputError("Email not found!", { errors });
       }
 
       const match = await bcrypt.compare(password, user.password);
