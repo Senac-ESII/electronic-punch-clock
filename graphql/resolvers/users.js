@@ -8,56 +8,56 @@ const {
   validateRegisterInput,
   validateLoginInput,
 } = require("../../util/validators");
-
+/**
+ * Create a new jwt token
+ * @param {Object} user
+ * @returns {token} - return a new jwt token
+ */
 function generateToken(user) {
   return jwt.sign(
     {
       id: user._id,
       email: user.email,
-      username: user.username,
+      name: user.name,
     },
     SECRET_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: "3h" }
   );
 }
 
 module.exports = {
   Mutation: {
+    /**
+     * Create a new user in database, hash the password and generate a new jwt token
+     * @param {String} name
+     * @param {String} email
+     * @param {String} password
+     * @param {Request} context have all logged user attributes
+     * @returns {object} - return the object User and the jwt token
+     */
     async register(
       _,
-      { registerInput: { username, email, password } },
+      { registerInput: { name, email, password } },
       context,
       info
     ) {
-      const { valid, errors } = validateRegisterInput(
-        username,
-        email,
-        password
-      );
+      const { valid, errors } = validateRegisterInput(name, email, password);
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
 
-      let user = await User.findOne({ username });
+      let user = await User.findOne({ email });
       if (user) {
-        throw new UserInputError("Username already taken!", {
+        throw new UserInputError("Email already in use!", {
           errors: {
-            username: "This username is taken",
-          },
-        });
-      }
-      user = await User.findOne({ email });
-      if (user) {
-        throw new UserInputError("Email already taken!", {
-          errors: {
-            username: "This Email is taken",
+            email: "Email already in use",
           },
         });
       }
       password = await bcrypt.hash(password, 12);
 
       const newUser = new User({
-        username,
+        name,
         email,
         password,
         role: "user",
@@ -72,17 +72,22 @@ module.exports = {
         token,
       };
     },
-
-    async login(_, { username, password }) {
-      const { errors, valid } = validateLoginInput(username, password);
+    /**
+     * create a new jwt token that is used to validate login, compare the password with hash database password and validate inputs
+     * @param {String} email
+     * @param {String} password
+     * @returns {token} - returns a user and a new jwt token
+     */
+    async login(_, { email, password }) {
+      const { errors, valid } = validateLoginInput(email, password);
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email });
       if (!user) {
-        errors.general = "User not found!";
-        throw new UserInputError("User not found!", { errors });
+        errors.general = "Email not found!";
+        throw new UserInputError("Email not found!", { errors });
       }
 
       const match = await bcrypt.compare(password, user.password);

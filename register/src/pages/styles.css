@@ -1,0 +1,138 @@
+#root {
+  height: 100%;
+}
+
+.ui.container {
+  height: 100%;
+  width: 100%;
+}
+
+.logo-image {
+  margin-left: 45px;
+  margin-top: 15px;
+}
+
+.ui.grid {
+  height: 100%;
+}
+
+.colored-button {
+  background: #219653 !important;
+  margin-left: 750px !important;
+  margin-top: 15px !important;
+}
+
+.register-button {
+  background: #219653 !important;
+}
+
+.button-text {
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.span-text {
+  color: #000000;
+}
+
+.ui.segment {
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+body {
+  background-color: #e5e5e5;
+}
+
+.logout-button {
+  background: #ffffff !important;
+  width: 144.38px;
+  height: 76px;
+  margin-top: 240px !important;
+}
+
+.side-bar {
+  height: 102.2%;
+  width: 160px !important;
+  background-color: #ffffff;
+}
+
+.field {
+  width: 300px !important;
+}
+
+.login-logo {
+  width: 300px;
+  height: 270px;
+  margin-left: 150px;
+  margin-bottom: 120px;
+}
+
+.bg-color {
+  background-color: #424242 !important;
+  border: none !important;
+}
+
+.dash-button {
+  width: 144.38px;
+  height: 76px;
+  background-color: #ffffff !important;
+}
+
+.div-login {
+  background-color: #ffffff !important;
+  border-radius: 15px !important;
+  height: 218px;
+  top: 25%;
+  margin-top: 200px;
+  margin-left: 50px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ui.segment {
+  background-color: #ffffff;
+  width: 550px;
+  margin-left: 150px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.register-label {
+  padding-top: 15px;
+  padding-left: 25px;
+  font-size: 17px;
+}
+
+.register-name {
+  padding-top: 15px;
+  padding-left: 25px;
+}
+
+.date-time-input {
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-bottom: 25px;
+}
+
+.space {
+  word-spacing: 30px;
+}
+
+.dash-label {
+  width: 550px;
+  margin-left: 150px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.admin-dash-label {
+  margin-top: 30px;
+  width: 550px;
+  margin-left: 150px;
+  margin-bottom: 10px;
+  text-align: center;
+}
