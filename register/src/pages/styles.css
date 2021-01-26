@@ -50,7 +50,7 @@ body {
   background: #ffffff !important;
   width: 144.38px;
   height: 76px;
-  margin-top: 210px !important;
+  margin-top: 240px !important;
 }
 
 .side-bar {
@@ -98,4 +98,41 @@ body {
   width: 550px;
   margin-left: 150px;
   border-radius: 8px;
+  text-align: center;
+}
+
+.register-label {
+  padding-top: 15px;
+  padding-left: 25px;
+  font-size: 17px;
+}
+
+.register-name {
+  padding-top: 15px;
+  padding-left: 25px;
+}
+
+.date-time-input {
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-bottom: 25px;
+}
+
+.space {
+  word-spacing: 30px;
+}
+
+.dash-label {
+  width: 550px;
+  margin-left: 150px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.admin-dash-label {
+  margin-top: 30px;
+  width: 550px;
+  margin-left: 150px;
+  margin-bottom: 10px;
+  text-align: center;
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 
@@ -50,14 +50,36 @@ function AdminDashboard() {
         </Button>
       </div>
       <div className="thirteen wide column">
-        {user && <Grid.Column></Grid.Column>}
+        {user && (
+          <div class="ui admin-dash-label">
+            <List divided verticalAlign="middle">
+              <List.Item>
+                <div className="clocks">
+                  <Grid columns={3}>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <b>Colaborador</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <b>Data</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <b>Hora</b>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </div>
+              </List.Item>
+            </List>
+          </div>
+        )}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (
           <div>
             {clocks &&
               clocks.map((clock) => (
-                <div class="ui segment clocks-list">
+                <div class="ui segment">
                   <ListCard clock={clock} user={user} />
                 </div>
               ))}

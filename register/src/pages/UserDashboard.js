@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { Button, Modal, Form, Grid } from "semantic-ui-react";
+import { Button, Form, Grid, List, Modal } from "semantic-ui-react";
 import gql from "graphql-tag";
+import { Link } from "react-router-dom";
+
 import { useForm } from "../util/hooks";
 import ListCard from "../components/ListCard";
-
 import { AuthContext } from "../context/auth";
 import SmallLogo from "../assets/imgs/smallLogo.svg";
 import Logout from "../assets/imgs/logout.svg";
 import Registers from "../assets/imgs/registers.svg";
 import "./styles.css";
-import { Link } from "react-router-dom";
 
 function UserDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
@@ -89,41 +89,71 @@ function UserDashboard() {
               <span className="button-text">Registrar</span>
             </button>
           }
-          header={
-            <>
-              <h3>Novo Registro</h3>
-              <label>Colaborador</label>
-              <h4>{user.name}</h4>
-            </>
-          }
           content={
-            <>
-              <label>Data/Hora</label>
-              <form onSubmit={onSubmit}>
-                <Form.Input
-                  placeholder="___/___/___"
-                  name="date"
-                  onChange={onChange}
-                  value={values.date}
-                  error={error ? true : false}
-                ></Form.Input>
-                <Form.Input
-                  placeholder="___:___"
-                  name="time"
-                  onChange={onChange}
-                  value={values.time}
-                  error={error ? true : false}
-                ></Form.Input>
-
-                <Button type="submit" color="teal">
-                  Submit
-                </Button>
-              </form>
-            </>
+            <div class="ui date-form">
+              <div class="register-label">
+                <h3>Novo Registro</h3>
+              </div>
+              <div className="ui divider"></div>
+              <div class="register-label">
+                <label>Colaborador</label>
+              </div>
+              <div class="register-name">
+                <h3>{user.name}</h3>
+              </div>
+              <div class="register-label">
+                <label for="time">Data/Hora</label>
+              </div>
+              <div class="ui input date-time-input">
+                <Form onSubmit={onSubmit}>
+                  <Form.Field>
+                    <Form.Input
+                      placeholder="___/___/___"
+                      name="date"
+                      onChange={onChange}
+                      value={values.date}
+                      error={error ? true : false}
+                    ></Form.Input>
+                    <Form.Input
+                      placeholder="___:___"
+                      name="time"
+                      onChange={onChange}
+                      value={values.time}
+                      error={error ? true : false}
+                    ></Form.Input>
+                    <Button type="submit" color="green">
+                      Submit
+                    </Button>
+                  </Form.Field>
+                </Form>
+              </div>
+            </div>
           }
         />
         <div className="three column row">
-          {user && <Grid.Column></Grid.Column>}
+          {user && (
+            <div class="ui dash-label">
+              <List divided verticalAlign="middle">
+                <List.Item>
+                  <div className="clocks">
+                    <Grid columns={3}>
+                      <Grid.Row>
+                        <Grid.Column>
+                          <b>Colaborador</b>
+                        </Grid.Column>
+                        <Grid.Column>
+                          <b>Data</b>
+                        </Grid.Column>
+                        <Grid.Column>
+                          <b>Hora</b>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </div>
+                </List.Item>
+              </List>
+            </div>
+          )}
           {loading ? (
             <h1>Loading posts..</h1>
           ) : (
