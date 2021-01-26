@@ -58,7 +58,7 @@ function Login(props) {
                 <img className="login-logo ui image" src={Logo} alt="logo" />
               </div>
             </div>
-            <div className="ui segment div-login">
+            <div className="ui div-login">
               <div className="form">
                 <Form
                   onSubmit={onSubmit}

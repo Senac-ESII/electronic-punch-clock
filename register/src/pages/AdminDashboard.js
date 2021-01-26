@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Grid, Transition, Button } from "semantic-ui-react";
+import { Grid, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 
 import { AuthContext } from "../context/auth";
+import SmallLogo from "../assets/imgs/smallLogo.svg";
+import Logout from "../assets/imgs/logout.svg";
+import Registers from "../assets/imgs/registers.svg";
+import ListCard from "../components/ListCard";
+import "./styles.css";
 
 function AdminDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
@@ -25,33 +30,41 @@ function AdminDashboard() {
   const handleItemClick = () => logout();
 
   return (
-    <Grid columns={3}>
-      <Grid.Row className="page-title">
-        <h1>Clocks</h1>
-      </Grid.Row>
-      <Grid.Row>
+    <div className="ui grid">
+      <div className="side-bar column">
+        <div class="ui small image">
+          <img src={SmallLogo} alt="logo" className="logo-image" />
+        </div>
+        <div className="ui divider"></div>
+        <Button className="dash-button ui button">
+          <img src={Registers} alt="registro" />
+        </Button>
+        <div className="ui divider"></div>
+        <Button
+          className="logout-button ui big button"
+          onClick={handleItemClick}
+          as={Link}
+          to="/login"
+        >
+          <img src={Logout} alt="logout" />
+        </Button>
+      </div>
+      <div className="thirteen wide column">
         {user && <Grid.Column></Grid.Column>}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (
-          <Transition.Group>
+          <div>
             {clocks &&
               clocks.map((clock) => (
-                <Grid.Column key={clock.id} style={{ marginBottom: 20 }}>
-                  <label class="">{clock.username}</label>
-                  <label class="">{clock.timeRegistered.substr(0, 10)}</label>
-                  <label class="">{clock.timeRegistered.substr(10)}</label>
-                </Grid.Column>
+                <div class="ui segment clocks-list">
+                  <ListCard clock={clock} user={user} />
+                </div>
               ))}
-          </Transition.Group>
+          </div>
         )}
-      </Grid.Row>
-      <Grid.Row>
-        <Button onClick={handleItemClick} as={Link} to="/login">
-          Logout
-        </Button>
-      </Grid.Row>
-    </Grid>
+      </div>
+    </div>
   );
 }
 

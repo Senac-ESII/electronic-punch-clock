@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { Button, Modal, Form, List, Grid } from "semantic-ui-react";
+import { Button, Modal, Form, Grid } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
 import ListCard from "../components/ListCard";
@@ -10,6 +10,7 @@ import SmallLogo from "../assets/imgs/smallLogo.svg";
 import Logout from "../assets/imgs/logout.svg";
 import Registers from "../assets/imgs/registers.svg";
 import "./styles.css";
+import { Link } from "react-router-dom";
 
 function UserDashboard() {
   const FETCH_CLOCKS_QUERY = gql`
@@ -75,6 +76,8 @@ function UserDashboard() {
         <Button
           className="logout-button ui big button"
           onClick={handleItemClick}
+          as={Link}
+          to="/login"
         >
           <img src={Logout} alt="logout" />
         </Button>
@@ -127,7 +130,7 @@ function UserDashboard() {
             <div>
               {clocks &&
                 clocks.map((clock) => (
-                  <div class="ui segment relaxed">
+                  <div class="ui segment ">
                     <ListCard clock={clock} user={user} />
                   </div>
                 ))}

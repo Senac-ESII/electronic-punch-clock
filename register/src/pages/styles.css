@@ -84,8 +84,13 @@ body {
 .div-login {
   background-color: #ffffff !important;
   border-radius: 15px !important;
-  height: 210px;
+  height: 218px;
   top: 25%;
+  margin-top: 200px;
+  margin-left: 50px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .ui.segment {
