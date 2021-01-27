@@ -14,7 +14,7 @@ Requisitos:
 Utilização:
 
  - clone este repositório para um diretório local em sua maquina.
- - adicione uma pasta ao **src** chamada **./config.js** com o link de conexão com seu banco de dados Mongo, porta a ser utilizada como por ex: **localhost:3000**, e uma **secret_key** para jwt.
+ - adicione uma pasta ao **src** chamada **./config.js** com o link de conexão com seu banco de dados Mongo chamado **MONGODB**, porta a ser utilizada como **PORT** por ex: **localhost:3000**, e uma **SECRET_KEY** para jwt.
  - ao arquivo **apolloProvider.js** localizado em **./register/src/apolloProvider.js**   adicione a **url** onde seu servidor esta rodando.
  - abra um terminal dentro da raiz da pasta e executar um **npm install** ou **npm i** para baixar todos os pacotes utilizados.
  - agora basta executar o comando **npm start** dentro da pasta raiz para a api e outro **npm start** dentro da pasta register para rodar o front.
