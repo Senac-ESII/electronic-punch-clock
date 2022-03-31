@@ -17,7 +17,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("mongoDB Connected!");
+    console.log("PostgreSQL Connected!");
     return server.listen({ port: PORT });
   })
   .then((res) => {
